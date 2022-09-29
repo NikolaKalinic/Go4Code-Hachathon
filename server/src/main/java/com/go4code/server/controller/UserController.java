@@ -63,24 +63,15 @@ public class UserController {
     public User login(@RequestBody LoginDTO loginDTO) {
     	String userName = loginDTO.getUsername();
     	String password = loginDTO.getPassword();
-    	
-    	
-    	
-    	System.out.println(userName);
-    	System.out.println(password);
 
     	
         User user = userService.findByUsername(userName);
         if (user == null) {
-        	System.out.println("a");
             return null;
             
         }
         
         if (!user.getPassword().equals(password)) {
-        	System.out.println(user.getPassword() + "ovoje get pass");
-        	System.out.println(password + "ovo je password");
-        	System.out.println("b");
             return null;
         }
         System.out.println(user);
