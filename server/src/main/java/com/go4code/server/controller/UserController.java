@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.go4code.server.dto.LoginDTO;
 import com.go4code.server.dto.UserDTO;
 import com.go4code.server.model.User;
 import com.go4code.server.service.UserService;
@@ -56,6 +57,23 @@ public class UserController {
 
         final User savedUser = userService.save(user);
         return new ResponseEntity<>(new UserDTO(savedUser), HttpStatus.CREATED);
+    }
+    
+    @PostMapping(value = "api/login")
+    public ResponseEntity login(@RequestBody LoginDTO loginDTO) {
+    	String userName = loginDTO.getUsername();
+    	String password = loginDTO.getUsername();
+    	
+        User user = userService.findByUsername(userName);
+        if (user == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        
+        if (user.getPassword() != password) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping(value = "api/users/{id}")

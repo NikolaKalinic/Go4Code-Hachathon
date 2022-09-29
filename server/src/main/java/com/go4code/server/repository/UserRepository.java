@@ -9,5 +9,6 @@ import com.go4code.server.model.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 	
 	public User findByUsername(String userName);
+	public User findByPassword(String password);
 
 }
