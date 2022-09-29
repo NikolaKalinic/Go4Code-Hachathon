@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
+import { CommentDTO } from '../DTO/CommentDTO';
 import { Post } from '../model/Post.model';
 
 @Component({
@@ -49,7 +50,14 @@ export class MainComponent implements OnInit {
     );
   }
 
-  sendComment(i: number) {
-    alert(this.comments[i]);
+  sendComment(i: number, post: Post) {
+    var user: any = JSON.parse(localStorage.getItem('user') || '{}');
+    var newComment = new CommentDTO(user, this.comments[i], '', post);
+    console.log(newComment);
+    this.appService
+      .addCommentOnPost(newComment)
+      .subscribe((res) => alert('DODAO SAM'));
+    window.location.reload();
+    // alert(this.comments[i]);
   }
 }

@@ -7,6 +7,7 @@ import { Post } from './model/Post.model';
 import { User } from './model/User.model';
 import { Comment } from './model/Comment.model';
 import { PostDto } from './DTO/post.dto';
+import { CommentDTO } from './DTO/CommentDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -43,8 +44,14 @@ export class AppService {
     return this.http.post<any>(`http://localhost:8080/api/login`, userDto);
   }
 
-  register(user: User){
-    return this.http.post<any>(`http://localhost:8080/api/users`, user)
+  addCommentOnPost(newComment: CommentDTO) {
+    return this.http.post<any>(
+      `http://localhost:8080/api/comments`,
+      newComment
+    );
+  }
+  register(user: User) {
+    return this.http.post<any>(`http://localhost:8080/api/users`, user);
   }
 
   httpOptions = {
