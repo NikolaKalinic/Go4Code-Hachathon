@@ -17,7 +17,7 @@ public class CommentService {
 	CommentRepository commentRepository;
 
 	public List<Comment> findAll() {
-		return commentRepository.findAll();
+		return commentRepository.findAllByOrderByDateDesc();
 	}
 	
 	public Page<Comment> findAll(Pageable page) {
@@ -37,7 +37,7 @@ public class CommentService {
 	}
 	
 	public List<Comment> findCommentsByPostId(Long id) {
-		return commentRepository.findByPostId(id);
+		return commentRepository.findByPostIdOrderByDateDesc(id);
 	}
 
 }
