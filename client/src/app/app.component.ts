@@ -14,13 +14,16 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.appService.cast.subscribe((user) =>
-      user === null ? (this.logged = false) : (this.logged = true)
-    );
+    localStorage.getItem('user') !== null
+      ? (this.logged = true)
+      : (this.logged = false);
   }
 
   logout() {
-    this.appService.editUser(null);
-    localStorage.setItem('user', JSON.stringify(null));
+    // this.appService.editUser(null);
+    localStorage.removeItem('user');
+    localStorage.getItem('user') !== null
+      ? (this.logged = true)
+      : (this.logged = false);
   }
 }

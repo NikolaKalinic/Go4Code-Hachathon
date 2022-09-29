@@ -12,6 +12,7 @@ export class MainComponent implements OnInit {
   public posts: Post[];
   public comments: string[] = [];
   public forAllComment: string = '';
+  public logged: boolean;
 
   constructor(private appService: AppService) {
     this.posts = [];
@@ -20,6 +21,9 @@ export class MainComponent implements OnInit {
       this.previewNewCommentSection.push(false);
       this.comments.push('');
     }
+    localStorage.getItem('user') === null
+      ? (this.logged = false)
+      : (this.logged = true);
   }
 
   ngOnInit(): void {
@@ -27,6 +31,9 @@ export class MainComponent implements OnInit {
   }
 
   openNewComment(i: number) {
+    localStorage.getItem('user') !== null
+      ? (this.logged = true)
+      : (this.logged = false);
     this.previewNewCommentSection[i] === false
       ? (this.previewNewCommentSection[i] = true)
       : (this.previewNewCommentSection[i] = false);
