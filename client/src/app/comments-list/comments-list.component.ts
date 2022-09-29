@@ -40,6 +40,7 @@ export class CommentsListComponent implements OnInit {
   }
   id: number = -1;
   ngOnInit(): void {
+    this.appService.editUser(localStorage.getItem('user'));
     //this.route.queryParams.subscribe(params => {this.post = params[];})
     // this.route.params.subscribe( params =>
     //   {
