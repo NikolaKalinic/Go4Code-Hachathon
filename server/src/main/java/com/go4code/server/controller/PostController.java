@@ -3,6 +3,9 @@ package com.go4code.server.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.go4code.server.dto.CommentDTO;
+import com.go4code.server.model.Comment;
+import com.go4code.server.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,9 @@ public class PostController {
 	
 	@Autowired
     PostService postService;
+
+    @Autowired
+    CommentService commentService;
 
     @GetMapping(value = "api/posts")
     public ResponseEntity getPostsPage() {
@@ -97,6 +103,21 @@ public class PostController {
         
         List<Post> retVal = postService.findAll();
         return new ResponseEntity(retVal,HttpStatus.OK);
+    }
+
+    @GetMapping(value = "api/post/{id}/comments")
+    public ResponseEntity getComments(@PathVariable Long id) {
+        final List<Comment> comments = commentService.findCommentsByPostId(id);
+
+//        if (comments == null) {
+//            return new ResponseEntity(HttpStatus.NOT_FOUND);
+//        }
+//
+//        final List<CommentDTO> commentDTO = new CommentDTO();
+
+
+
+        return new ResponseEntity<>(comments, HttpStatus.OK);
     }
 
 }

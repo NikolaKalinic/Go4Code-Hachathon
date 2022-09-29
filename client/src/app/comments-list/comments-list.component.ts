@@ -14,9 +14,11 @@ import { AppService } from '../app.service';
 export class CommentsListComponent implements OnInit {
 
    @Input() public post: Post;
-   public comments: CommentInterface[] = [];
+   public comments: Comment[];
 
   constructor(private route: ActivatedRoute, private http: HttpClient,private appService:AppService) {
+    this.comments=[]
+
     this.post={
        id: -1,
         user: {
@@ -46,6 +48,9 @@ export class CommentsListComponent implements OnInit {
 
     this.route.params.subscribe(params => {this.id = +params['id'];})
     this.appService.getPostById(this.id).subscribe(res => this.post=res);
-    console.log(this.post.user.username);
+
+    this.appService.getCommentsByPostId(this.id).subscribe(res => this.comments=res);
+    console.log(this.comments);
+
   }
 }

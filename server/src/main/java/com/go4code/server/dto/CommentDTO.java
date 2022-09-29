@@ -52,6 +52,13 @@ public class CommentDTO {
         this.post = comment.getPost();
     }
 
+	public CommentDTO(User user, String content, LocalDateTime date, Post post) {
+		this.user = user;
+		this.content = content;
+		this.date = date;
+		this.post =post;
+	}
+
 	public Long getId() {
 		return id;
 	}
