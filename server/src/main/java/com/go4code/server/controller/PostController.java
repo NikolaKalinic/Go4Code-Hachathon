@@ -1,5 +1,6 @@
 package com.go4code.server.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,12 +65,11 @@ public class PostController {
     public ResponseEntity create(@RequestBody PostDTO postDTO) {
         final Post post = new Post();
         post.setUser(postDTO.getUser());
-        post.setComments(postDTO.getComments());
-        post.setDate(postDTO.getDate());
+        post.setDate(LocalDateTime.now());
         post.setContent(postDTO.getContent());
         post.setAttachment(postDTO.getAttachment());
-        post.setRating(postDTO.getRating());
-        post.setViewers(postDTO.getViewers());
+        post.setRating(0);
+        post.setViewers(0);
 
         final Post savedPost = postService.save(post);
         List<Post> retVal = postService.findAllByDate();

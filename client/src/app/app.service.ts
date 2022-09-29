@@ -1,10 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { UserDto } from './DTO/User.dto';
 import { Post } from './model/Post.model';
 import { User } from './model/User.model';
 import { Comment } from './model/Comment.model';
+import { PostDto } from './DTO/post.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -43,5 +45,14 @@ export class AppService {
 
   register(user: User){
     return this.http.post<any>(`http://localhost:8080/api/users`, user)
+  }
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  addPost(post: PostDto): Observable<Post> {
+    return this.http
+      .post<Post>(`http://localhost:8080/api/posts`, post, this.httpOptions);
   }
 }
