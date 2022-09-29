@@ -2,10 +2,14 @@
   margin: auto;
   width: 20%;
 }
-.btn btn-success{
+.btn btn-success {
   margin-left: 30px;
 }
 
-.ha{
+.ha {
   margin-top: 10%;
+}
+
+.error {
+  color: red;
 }
