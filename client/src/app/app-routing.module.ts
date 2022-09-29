@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'main', component: MainComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'comments', component: CommentsListComponent },
+  { path: 'comment/:id', component: CommentsListComponent },
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
