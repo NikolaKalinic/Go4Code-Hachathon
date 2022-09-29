@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
+import { Post } from '../model/Post.model';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
   public previewNewCommentSection: boolean = false;
-  constructor() {}
+  public posts: Post[];
 
-  ngOnInit(): void {}
+  constructor(private appService: AppService) {
+    this.posts = [];
+  }
+
+  ngOnInit(): void {
+    this.appService.getAllPosts().subscribe((res) => (this.posts = res));
+  }
 
   openNewComment() {
     this.previewNewCommentSection === false
