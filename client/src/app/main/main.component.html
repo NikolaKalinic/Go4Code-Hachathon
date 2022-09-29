@@ -50,8 +50,9 @@
                     </div>
                     <div class="timeline-likes">
                       <div class="stats-right">
-                        <span class="stats-text">259 Shares</span>
-                        <span class="stats-text">21 Comments</span>
+                        <a class="stats-text" [routerLink]="['ZIKAAA']"
+                          >21 Comments</a
+                        >
                       </div>
                       <div class="stats">
                         <span class="fa-stack fa-fw stats-icon">
@@ -72,15 +73,18 @@
                         ><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i>
                         Like</a
                       >
-                      <a href="javascript:;" class="m-r-15 text-inverse-lighter"
-                        ><i class="fa fa-comments fa-fw fa-lg m-r-3"></i>
-                        Comment</a
-                      >
-                      <a href="javascript:;" class="m-r-15 text-inverse-lighter"
-                        ><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a
+                      <a
+                        href="javascript:;"
+                        (click)="openNewComment()"
+                        class="m-r-15 text-inverse-lighter"
+                        ><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> New
+                        comment</a
                       >
                     </div>
-                    <div class="timeline-comment-box">
+                    <div
+                      *ngIf="previewNewCommentSection"
+                      class="timeline-comment-box"
+                    >
                       <div class="user">
                         <img
                           src="https://bootdey.com/img/Content/avatar/avatar3.png"
@@ -109,6 +113,15 @@
                   </div>
                   <!-- end timeline-body -->
                 </li>
+                <!-- ///////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////
+              /////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////
+          ///////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////-->
                 <li>
                   <!-- begin timeline-time -->
                   <div class="timeline-time">
