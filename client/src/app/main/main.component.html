@@ -43,8 +43,10 @@
                       <span class="pull-right text-muted">18 Views</span>
                     </div>
                     <div class="timeline-content">
-                      <p>
+                      <p class="lead">
+                        <i class="fa fa-quote-left fa-fw pull-left"></i>
                         {{ post.content }}
+                        <i class="fa fa-quote-right fa-fw pull-right"></i>
                       </p>
                     </div>
                     <div class="timeline-likes">
@@ -94,13 +96,16 @@
                           <div class="input-group">
                             <input
                               type="text"
+                              [(ngModel)]="comments[i]"
                               class="form-control rounded-corner"
                               placeholder="Write a comment..."
+                              name="asd"
                             />
                             <span class="input-group-btn p-l-10">
                               <button
                                 class="btn btn-primary f-s-12 rounded-corner"
                                 type="button"
+                                (click)="sendComment(i)"
                               >
                                 Comment
                               </button>
