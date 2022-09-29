@@ -10,6 +10,8 @@ import com.go4code.server.model.Comment;
 
 @Component
 public interface CommentRepository extends JpaRepository<Comment, Long>{
-	public List<Comment> findByPostId(Long id);
+	public List<Comment> findByPostIdOrderByDateDesc(Long id);
+	
+	public List<Comment> findAllByOrderByDateDesc();
 
 }
