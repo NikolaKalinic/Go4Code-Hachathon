@@ -1,39 +1,37 @@
-package com.go4code.server.model;
+package com.go4code.server.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import javax.persistence.Column;
 
-import javax.persistence.*;
+import com.go4code.server.model.User;
 
-@Entity
-@Getter
-@Setter
-@ToString
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(unique = true, nullable = false)
+
+public class UserDTO {
+	
+	private Long id;
     private String username;
-    @Column(unique = true, nullable = false)
     private String email;
-    @Column(nullable = false)
     private String password;
+    
+    public UserDTO(){}
 
-    public User(){}
-
-    public User(Long id, String username, String email, String password){
+    public UserDTO(Long id, String username, String email, String password){
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
     }
 
-    public User( String username, String email, String password){
+    public UserDTO( String username, String email, String password){
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+    
+    public UserDTO(User user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
     }
 
 	public Long getId() {
@@ -69,4 +67,5 @@ public class User {
 	}
     
     
+
 }

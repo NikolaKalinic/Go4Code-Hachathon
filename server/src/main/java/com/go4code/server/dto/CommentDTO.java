@@ -1,39 +1,32 @@
-package com.go4code.server.model;
+package com.go4code.server.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Getter
-@Setter
-@ToString
-public class Comment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
+import javax.persistence.ManyToOne;
+
+import com.go4code.server.model.Comment;
+import com.go4code.server.model.Post;
+import com.go4code.server.model.User;
+
+public class CommentDTO {
+	
+	private Long id;
     private User user;
 
     private String content;
 
     private String attachment;
 
-    @ManyToOne(fetch = FetchType.EAGER)
     private Post post;
 
     private LocalDateTime date;
 
 
-    public Comment(){
+    public CommentDTO(){
 
     }
 
-    public Comment(Long id, User user, String content, String attachment,LocalDateTime date, Post post) {
+    public CommentDTO(Long id, User user, String content, String attachment,LocalDateTime date, Post post) {
         this.id = id;
         this.user = user;
         this.content = content;
@@ -42,12 +35,21 @@ public class Comment {
         this.post = post;
     }
 
-    public Comment( User user, String content, String attachment, LocalDateTime date, Post post) {
+    public CommentDTO( User user, String content, String attachment, LocalDateTime date, Post post) {
         this.user = user;
         this.content = content;
         this.attachment = attachment;
         this.date = date;
         this.post =post;
+    }
+    
+    public CommentDTO(Comment comment) {
+        this.id = comment.getId();
+        this.user = comment.getUser();
+        this.content = comment.getContent();
+        this.date = comment.getDate();
+        this.attachment = comment.getAttachment();
+        this.post = comment.getPost();
     }
 
 	public Long getId() {
@@ -97,7 +99,5 @@ public class Comment {
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
-    
-    
-}
 
+}
