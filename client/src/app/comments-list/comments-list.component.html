@@ -11,9 +11,10 @@
 			<span class="be-comment-name">
 				<h3 href="blog-detail-2.html">{{post.user.username}}</h3>
 			</span>
-			<span class="be-comment-time">
-				<i class="fa fa-clock-o text-black"></i>
+			<span class="be-comment-time text-dark">
+				<i class="fa fa-clock-o text-dark"></i>
 				{{post.date}}
+				<button type="button" *ngIf="showDeletePost" (click)="deletePost()" class="btn btn-outline-danger font-weight-bold">Delete</button>
 			</span>
 			<!-- <p class="be-comment-text">{{post.content}}</p> -->
 			<div class="timeline-content">
@@ -42,9 +43,10 @@
 						<span class="be-comment-name">
 							<h4 href="blog-detail-2.html">{{cc.user.username}}</h4>
 							</span>
-						<span class="be-comment-time">
-							<i class="fa fa-clock-o"></i>
+						<span class="be-comment-time text-dark">
+							<i class="fa fa-clock-o text-dark"></i>
 							{{cc.date}}
+							<button type="button" *ngIf="showDeleteComment" (click)="deleteComment(cc.id)"  class="btn btn-outline-danger font-weight-bold">Delete</button>
 						</span>
 		
 					<p class="be-comment-text">

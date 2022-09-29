@@ -5,6 +5,7 @@ import { HttpResponse, HttpClient, HttpParams } from '@angular/common/http';
 import { Post } from '../model/Post.model';
 import { getLocaleDateFormat } from '@angular/common';
 import { AppService } from '../app.service';
+import { User } from '../model/User.model';
 
 @Component({
   selector: 'app-comments-list',
@@ -14,11 +15,14 @@ import { AppService } from '../app.service';
 export class CommentsListComponent implements OnInit {
   public post: Post;
   public comments: Comment[];
+  public showDeletePost: boolean=false;
+  public showDeleteComment: boolean=false;
 
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private appService: AppService
+    private appService: AppService,
+    private router:Router
   ) {
     this.comments = [];
 
@@ -39,8 +43,10 @@ export class CommentsListComponent implements OnInit {
     };
   }
   id: number = -1;
+
   ngOnInit(): void {
     this.appService.editUser(localStorage.getItem('user'));
+    
     //this.route.queryParams.subscribe(params => {this.post = params[];})
     // this.route.params.subscribe( params =>
     //   {
@@ -52,11 +58,33 @@ export class CommentsListComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.id = +params['id'];
     });
-    this.appService.getPostById(this.id).subscribe((res) => (this.post = res));
+    var aa:any=JSON.parse(localStorage.getItem('user')||'{}');
+    this.appService.getPostById(this.id).subscribe((res) => {this.post = res;if(this.post.user.username===aa.username){
+      this.showDeletePost=true;
+    }else{
+      this.showDeletePost=false;
+    }});
+
+    this.appService.getCommentsByPostId(this.id).subscribe((res) => {this.comments = res;if(this.post.user.username===aa.username){
+      this.showDeleteComment=true;
+    }else{
+      this.showDeleteComment=false;
+    }});
+    
 
     this.appService
       .getCommentsByPostId(this.id)
-      .subscribe((res) => (this.comments = res));
-    console.log(this.comments);
+      .subscribe((res) => (this.comments = res)); 
   }
+
+  deletePost(){
+    this.appService.deletePost(this.post.id).subscribe(res =>this.router.navigate(['main']));
+  }
+
+  deleteComment(id:number|undefined){
+    this.appService.deleteComment(id).subscribe(res =>window.location.reload);
+    window.location.reload();
+  }
+
+
 }

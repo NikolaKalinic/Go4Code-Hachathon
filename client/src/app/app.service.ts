@@ -40,4 +40,12 @@ export class AppService {
   login(userDto: UserDto) {
     return this.http.post<any>(`http://localhost:8080/api/login`, userDto);
   }
+
+  deletePost(id: number|undefined){
+    return this.http.delete<any>(`http://localhost:8080/api/posts/${id}`);
+  }
+
+  deleteComment(id: number|undefined){
+    return this.http.delete<any>(`http://localhost:8080/api/comments/${id}`);
+  }
 }
