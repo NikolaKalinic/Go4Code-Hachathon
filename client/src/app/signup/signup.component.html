@@ -16,7 +16,7 @@
                 </div>
                 <div  class="col-md-9 pe-5">
   
-                  <input type="text" placeholder="Your username" class="form-control form-control-lg" />
+                  <input [(ngModel)]="user.username" type="text" placeholder="Your username" class="form-control form-control-lg" />
   
                 </div>
               </div>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="email" class="form-control form-control-lg" placeholder="example@example.com" />
+                  <input [(ngModel)]="user.email" type="email" class="form-control form-control-lg" placeholder="example@example.com" />
   
                 </div>
               </div>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-md-9 pe-5">
   
-                    <input [ngClass]="password!=repassword ? 'error': ''" [(ngModel)]="password"  type="password" class="form-control form-control-lg" placeholder="Your password" />
+                    <input [ngClass]="password!=repassword ? 'error': ''" name="q" [(ngModel)]="password"  type="password" class="form-control form-control-lg" placeholder="Your password" />
   
                 </div>
               </div>
@@ -67,7 +67,7 @@
               <hr class="mx-n3">
   
               <div class="px-5 py-4">
-                <button  [ngClass]="password!=repassword ? '': 'submit'" type="submit"   class="btn btn-primary btn-lg">Register</button>
+                <button  [ngClass]="user.password!=repassword ? '': 'register()'" (click)="register()"  class="btn btn-primary btn-lg">Register</button>
               </div>
   
             </div>

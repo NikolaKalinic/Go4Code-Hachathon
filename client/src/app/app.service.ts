@@ -40,4 +40,8 @@ export class AppService {
   login(userDto: UserDto) {
     return this.http.post<any>(`http://localhost:8080/api/login`, userDto);
   }
+
+  register(user: User){
+    return this.http.post<any>(`http://localhost:8080/api/users`, user)
+  }
 }
