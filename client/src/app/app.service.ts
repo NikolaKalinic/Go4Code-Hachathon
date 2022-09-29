@@ -1,9 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Post } from './model/Post.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppService {
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
+  getAllPosts() {
+    return this.http.get<Post[]>(`http://localhost:8080/api/posts`);
+  }
 }

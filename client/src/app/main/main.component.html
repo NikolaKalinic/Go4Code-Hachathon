@@ -16,11 +16,11 @@
             <div class="tab-pane fade active show" id="profile-post">
               <!-- begin timeline -->
               <ul class="timeline">
-                <li>
+                <li *ngFor="let post of posts">
                   <!-- begin timeline-time -->
                   <div class="timeline-time">
-                    <span class="date">today</span>
-                    <span class="time">04:20</span>
+                    <!-- <span class="date">today</span> -->
+                    <span class="time">{{ post.date }}</span>
                   </div>
                   <!-- end timeline-time -->
                   <!-- begin timeline-icon -->
@@ -37,15 +37,14 @@
                           alt=""
                       /></span>
                       <span class="username"
-                        ><a href="javascript:;">Sean Ngu</a> <small></small
+                        ><a href="javascript:;">{{ post.user.username }}</a>
+                        <small></small
                       ></span>
                       <span class="pull-right text-muted">18 Views</span>
                     </div>
                     <div class="timeline-content">
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nunc faucibus turpis quis tincidunt luctus. Nam sagittis
-                        dui in nunc consequat, in imperdiet nunc sagittis.
+                        {{ post.content }}
                       </p>
                     </div>
                     <div class="timeline-likes">
