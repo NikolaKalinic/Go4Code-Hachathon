@@ -10,9 +10,11 @@ import { SignupComponent } from './signup/signup.component';
 import { MainComponent } from './main/main.component';
 import { AppService } from './app.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CommentsListComponent } from './comments-list/comments-list.component';
+import { AddPostComponent } from './add-post/add-post.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SignupComponent, MainComponent, PageNotFoundComponent],
+  declarations: [AppComponent, LoginComponent, SignupComponent, MainComponent, PageNotFoundComponent, CommentsListComponent, AddPostComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [AppService],
   bootstrap: [AppComponent],

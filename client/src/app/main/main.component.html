@@ -16,11 +16,11 @@
             <div class="tab-pane fade active show" id="profile-post">
               <!-- begin timeline -->
               <ul class="timeline">
-                <li *ngFor="let post of posts">
+                <li *ngFor="let post of posts; let i = index">
                   <!-- begin timeline-time -->
                   <div class="timeline-time">
                     <!-- <span class="date">today</span> -->
-                    <span class="time">{{ post.date }}</span>
+                    <span class="time">{{ convertDate(post.date) }}</span>
                   </div>
                   <!-- end timeline-time -->
                   <!-- begin timeline-icon -->
@@ -49,8 +49,8 @@
                     </div>
                     <div class="timeline-likes">
                       <div class="stats-right">
-                        <a class="stats-text" [routerLink]="['ZIKAAA']"
-                          >21 Comments</a
+                        <a class="stats-text" href="comment/{{ post.id }}"
+                          >{{ post.comments.length }} Comments</a
                         >
                       </div>
                       <div class="stats">
@@ -74,14 +74,14 @@
                       >
                       <a
                         href="javascript:;"
-                        (click)="openNewComment()"
+                        (click)="openNewComment(i)"
                         class="m-r-15 text-inverse-lighter"
                         ><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> New
                         comment</a
                       >
                     </div>
                     <div
-                      *ngIf="previewNewCommentSection"
+                      *ngIf="previewNewCommentSection[i]"
                       class="timeline-comment-box"
                     >
                       <div class="user">
