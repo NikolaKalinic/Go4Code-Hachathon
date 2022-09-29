@@ -11,4 +11,8 @@ export class AppService {
   getAllPosts() {
     return this.http.get<Post[]>(`http://localhost:8080/api/posts`);
   }
+
+  getPostById(id:number){
+    return this.http.get<Post>(`http://localhost:8080/api/posts/${id}`);
+  }
 }
