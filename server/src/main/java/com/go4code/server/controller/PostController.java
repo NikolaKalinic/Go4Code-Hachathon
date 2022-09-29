@@ -35,6 +35,13 @@ public class PostController {
         return new ResponseEntity<>(retVal, HttpStatus.OK);
     }
     
+    @GetMapping(value = "api/getLatestPost")
+    public ResponseEntity getLatestPost() {
+        final Post retVal = postService.findAllByDate().get(0);
+
+        return new ResponseEntity<>(retVal, HttpStatus.OK);
+    }
+    
     @GetMapping(value = "api/posts/{id}")
     public ResponseEntity getPost(@PathVariable Long id) {
         final Post post = postService.findOne(id);
