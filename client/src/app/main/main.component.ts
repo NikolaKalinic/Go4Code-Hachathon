@@ -28,6 +28,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.appService.getAllPosts().subscribe((res) => (this.posts = res));
+    this.appService.editUser(localStorage.getItem('user'));
   }
 
   openNewComment(i: number) {
