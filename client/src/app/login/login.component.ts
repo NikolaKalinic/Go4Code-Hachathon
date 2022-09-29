@@ -5,28 +5,24 @@ import { UserDto } from '../DTO/User.dto';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  public userDto:UserDto;
+  public userDto: UserDto;
 
-
-  constructor(private appService:AppService) { 
-
-    this.userDto={
-      username:'',
-      password:''
-    }
+  constructor(private appService: AppService) {
+    this.userDto = {
+      username: '',
+      password: '',
+    };
   }
 
+  ngOnInit(): void {}
 
-
-  ngOnInit(): void {
+  login() {
+    this.appService.login(this.userDto).subscribe((res) => {
+      localStorage.setItem('user', JSON.stringify(res));
+      this.appService.editUser(res);
+    });
   }
-
-  login(){
-    alert(this.userDto.username)
-    this.appService.login(this.userDto).subscribe(res=>localStorage.setItem('user', JSON.stringify(res)));
-  }
-
 }

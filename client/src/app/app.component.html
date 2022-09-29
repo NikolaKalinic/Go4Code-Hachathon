@@ -4,14 +4,19 @@
       <a class="navbar-brand" [routerLink]="['main']">Facebook</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li class="item">
+      <li *ngIf="!logged" class="item">
         <a [routerLink]="['signup']"
           ><span class="glyphicon glyphicon-user"></span> Sign Up</a
         >
       </li>
-      <li class="item">
+      <li *ngIf="!logged" class="item">
         <a [routerLink]="['login']"
           ><span class="glyphicon glyphicon-log-in"></span> Login</a
+        >
+      </li>
+      <li *ngIf="logged" class="item">
+        <a [routerLink]="['main']" (click)="logout()"
+          ><span class="glyphicon glyphicon-log-in"></span> Logout</a
         >
       </li>
     </ul>

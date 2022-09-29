@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { UserDto } from './DTO/User.dto';
 import { Post } from './model/Post.model';
 import { User } from './model/User.model';
@@ -8,13 +9,24 @@ import { User } from './model/User.model';
   providedIn: 'root',
 })
 export class AppService {
-  constructor(private http: HttpClient) {}
+  private currentUser = new BehaviorSubject<User | null>(null);
+
+  cast = this.currentUser.asObservable();
+
+  public loggedUser: User | null;
+  constructor(private http: HttpClient) {
+    this.loggedUser = null;
+  }
+
+  editUser(newUser: any) {
+    this.currentUser.next(newUser);
+  }
 
   getAllPosts() {
     return this.http.get<Post[]>(`http://localhost:8080/api/posts`);
   }
 
-  login(userDto:UserDto){
-     return this.http.post<any>(`http://localhost:8080/api/login`,userDto);
+  login(userDto: UserDto) {
+    return this.http.post<any>(`http://localhost:8080/api/login`, userDto);
   }
 }
