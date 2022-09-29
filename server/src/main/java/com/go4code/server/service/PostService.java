@@ -14,8 +14,8 @@ public class PostService {
 	@Autowired
 	PostRepository postRepository;
 
-	public List<Post> findAll() {
-		return postRepository.findAll();
+	public List<Post> findAllByDate() {
+		return postRepository.findAllByOrderByDateDesc();
 	}
 
 	public Post findOne(Long id) {

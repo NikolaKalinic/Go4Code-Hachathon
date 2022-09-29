@@ -10,12 +10,15 @@ import { Post } from '../model/Post.model';
 export class MainComponent implements OnInit {
   public previewNewCommentSection: boolean[] = [];
   public posts: Post[];
+  public comments: string[] = [];
+  public forAllComment: string = '';
 
   constructor(private appService: AppService) {
     this.posts = [];
     this.appService.getAllPosts().subscribe((res) => (this.posts = res));
     for (let post of this.posts) {
       this.previewNewCommentSection.push(false);
+      this.comments.push('');
     }
   }
 
@@ -36,5 +39,9 @@ export class MainComponent implements OnInit {
       ':' +
       dateString.split(':')[1]
     );
+  }
+
+  sendComment(i: number) {
+    alert(this.comments[i]);
   }
 }

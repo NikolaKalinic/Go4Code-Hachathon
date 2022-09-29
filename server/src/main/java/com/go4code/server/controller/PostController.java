@@ -34,9 +34,16 @@ public class PostController {
 
     @GetMapping(value = "api/posts")
     public ResponseEntity getPostsPage() {
-        final List<PostDTO> retVal = postService.findAll().stream()
+        final List<PostDTO> retVal = postService.findAllByDate().stream()
                 .map(PostDTO::new)
                 .collect(Collectors.toList());
+
+        return new ResponseEntity<>(retVal, HttpStatus.OK);
+    }
+    
+    @GetMapping(value = "api/getLatestPost")
+    public ResponseEntity getLatestPost() {
+        final Post retVal = postService.findAllByDate().get(0);
 
         return new ResponseEntity<>(retVal, HttpStatus.OK);
     }
@@ -65,7 +72,7 @@ public class PostController {
         post.setViewers(postDTO.getViewers());
 
         final Post savedPost = postService.save(post);
-        List<Post> retVal = postService.findAll();
+        List<Post> retVal = postService.findAllByDate();
         return new ResponseEntity<>(retVal, HttpStatus.CREATED);
     }
 
@@ -88,7 +95,7 @@ public class PostController {
         post.setViewers(postDTO.getViewers());
 
         final Post savedPost = postService.save(post);
-        List<Post> retVal = postService.findAll();
+        List<Post> retVal = postService.findAllByDate();
         return new ResponseEntity<>(retVal, HttpStatus.OK);
     }
 
@@ -101,7 +108,7 @@ public class PostController {
 
         postService.remove(id);
         
-        List<Post> retVal = postService.findAll();
+        List<Post> retVal = postService.findAllByDate();
         return new ResponseEntity(retVal,HttpStatus.OK);
     }
 

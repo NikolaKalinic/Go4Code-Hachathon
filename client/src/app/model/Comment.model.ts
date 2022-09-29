@@ -6,12 +6,16 @@ export class Comment implements CommentInterface {
   public user: User;
   public content: string;
   public post: Post;
+  public attachment: string;
+  public date: Date;
 
   constructor(miCfg: CommentInterface) {
     this.id = miCfg.id;
     this.user = miCfg.user;
     this.content = miCfg.content;
     this.post = miCfg.post;
+    this.attachment = miCfg.attachment;
+    this.date = miCfg.date;
   }
 }
 
@@ -20,4 +24,6 @@ export interface CommentInterface {
   user: User;
   content: string;
   post: Post;
+  attachment: string;
+  date: Date;
 }
