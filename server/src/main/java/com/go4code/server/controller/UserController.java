@@ -60,20 +60,31 @@ public class UserController {
     }
     
     @PostMapping(value = "api/login")
-    public ResponseEntity login(@RequestBody LoginDTO loginDTO) {
+    public User login(@RequestBody LoginDTO loginDTO) {
     	String userName = loginDTO.getUsername();
-    	String password = loginDTO.getUsername();
+    	String password = loginDTO.getPassword();
+    	
+    	
+    	
+    	System.out.println(userName);
+    	System.out.println(password);
+
     	
         User user = userService.findByUsername(userName);
         if (user == null) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        	System.out.println("a");
+            return null;
+            
         }
         
-        if (user.getPassword() != password) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        if (!user.getPassword().equals(password)) {
+        	System.out.println(user.getPassword() + "ovoje get pass");
+        	System.out.println(password + "ovo je password");
+        	System.out.println("b");
+            return null;
         }
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        System.out.println(user);
+        return user;
     }
 
     @PutMapping(value = "api/users/{id}")

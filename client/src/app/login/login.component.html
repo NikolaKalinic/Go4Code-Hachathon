@@ -12,12 +12,12 @@
       <form role="form">
         <div class="form-group">
           <label for="inputUsernameEmail">Username</label>
-          <input type="text" class="form-control" id="inputUsernameEmail" />
+          <input type="text" [(ngModel)]="userDto.username" class="form-control" id="inputUsernameEmail"  name="name2"/>
         </div>
         <div class="form-group">
-          <a class="pull-right" href="#">Forgot password?</a>
+          
           <label for="inputPassword">Password</label>
-          <input type="password" class="form-control" id="inputPassword" />
+          <input type="password" [(ngModel)]="userDto.password" class="form-control" id="inputPassword" name="name1" />
         </div>
         <div class="checkbox pull-right">
           <label>
@@ -25,8 +25,8 @@
             Remember me
           </label>
         </div>
-        <button type="submit" class="btn btn btn-primary">Log In</button>
-        <button class="btn btn-success">Create new account</button>
+        <button type="submit" (click)="login()" class="btn btn btn-primary">Log In</button>
+        <a class="pull-right" href="#">Forgot password?</a>
       </form>
     </div>
   </div>
