@@ -1,5 +1,8 @@
 package com.go4code.server.controller;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,7 +56,7 @@ public class CommentController {
         comment.setUser(commentDTO.getUser());
         comment.setContent(commentDTO.getContent());
         comment.setPost(commentDTO.getPost());
-        
+        comment.setDate(LocalDateTime.now());
         final Comment savedComment = commentService.save(comment);
         return new ResponseEntity<>(new CommentDTO(savedComment), HttpStatus.CREATED);
     }
@@ -86,5 +89,6 @@ public class CommentController {
         commentService.remove(id);
         return new ResponseEntity(HttpStatus.OK);
     }
+
 
 }
